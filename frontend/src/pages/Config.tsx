@@ -54,12 +54,12 @@ export function Config() {
   if (loading) {
     return (
       <>
-        <header className="page-header">
-          <h1 className="page-title">Config</h1>
-          <p className="page-desc">Preview generated config and rollback history.</p>
+        <header className="mb-6">
+          <h1>Config</h1>
+          <p className="text-light">Preview generated config and rollback history.</p>
         </header>
-        <div className="card">
-          <p className="empty-state">Loading…</p>
+        <div className="card p-4">
+          <p className="text-light align-center p-4">Loading…</p>
         </div>
       </>
     );
@@ -67,13 +67,13 @@ export function Config() {
 
   return (
     <>
-      <header className="page-header">
-        <h1 className="page-title">Config</h1>
-        <p className="page-desc">
+      <header className="mb-6">
+        <h1>Config</h1>
+        <p className="text-light">
           Preview of the config that will be applied. Edit and apply from <Link to="/sites">Sites</Link>.
         </p>
-        <p className="row gap-2" style={{ marginTop: "var(--space-2)", alignItems: "center" }}>
-          <Link to="/sites" className="btn btn-outline btn-sm">
+        <p className="hstack gap-2 mt-2">
+          <Link to="/sites" className="button outline small" style={{ textDecoration: "none" }}>
             Edit & apply on Sites
           </Link>
         </p>
@@ -81,33 +81,33 @@ export function Config() {
       <article className="card">
         {preview.provider ? (
           <>
-            <p className="row gap-2" style={{ alignItems: "center", marginBottom: "var(--space-3)" }}>
-              <span className="section-title" style={{ marginBottom: 0 }}>Preview</span>
-              <span className="badge">{preview.provider}</span>
+            <p className="hstack gap-2 mb-4">
+              <span style={{ fontWeight: 600, marginBlockEnd: 0 }}>Preview</span>
+              <span className="badge secondary">{preview.provider}</span>
             </p>
-            <pre className="pre-wrap" style={{ background: "var(--color-bg)", padding: "var(--space-4)", borderRadius: "var(--radius)", overflow: "auto", margin: 0 }}>
+            <pre style={{ margin: 0, overflow: "auto" }}>
               <code>{preview.raw || "(empty)"}</code>
             </pre>
           </>
         ) : (
-          <p className="status-muted">No proxy detected. Config preview unavailable.</p>
+          <p className="text-light">No proxy detected. Config preview unavailable.</p>
         )}
         {rollbackResult && (
-          <div className={rollbackResult.ok ? "alert alert-success" : "alert alert-error"} role="status" style={{ marginTop: "var(--space-4)" }}>
+          <div role="alert" data-variant={rollbackResult.ok ? "success" : "danger"} className="mt-4">
             {rollbackResult.ok ? "Rolled back successfully." : rollbackResult.error}
           </div>
         )}
       </article>
       {history.length > 0 && (
-        <section className="card" style={{ marginTop: "var(--space-6)" }} aria-labelledby="config-history-heading">
-          <h2 id="config-history-heading" className="section-title">History</h2>
-          <p className="page-desc" style={{ marginBottom: "var(--space-4)" }}>Roll back to a previous configuration.</p>
-          <ul className="unstyled-list stack">
+        <section className="card mt-6" aria-labelledby="config-history-heading">
+          <h2 id="config-history-heading" className="mb-4" style={{ fontSize: "var(--text-4)" }}>History</h2>
+          <p className="text-light mb-4">Roll back to a previous configuration.</p>
+          <ul className="unstyled vstack gap-2" style={{ padding: 0, margin: 0 }}>
             {history.map((entry) => (
-              <li key={entry.id} className="row gap-2" style={{ alignItems: "center", padding: "var(--space-3)", background: "var(--color-bg)", borderRadius: "var(--radius)" }}>
-                <span style={{ fontSize: "var(--text-sm)" }}>{new Date(entry.createdAt).toLocaleString()}</span>
-                <span className="badge">{entry.provider}</span>
-                <button type="button" className="btn btn-outline btn-sm" onClick={() => rollback(entry.id)}>
+              <li key={entry.id} className="hstack gap-2" style={{ alignItems: "center", padding: "var(--space-3)", background: "var(--faint)", borderRadius: "var(--radius-medium)" }}>
+                <span style={{ fontSize: "var(--text-7)" }}>{new Date(entry.createdAt).toLocaleString()}</span>
+                <span className="badge secondary">{entry.provider}</span>
+                <button type="button" className="outline small" onClick={() => rollback(entry.id)}>
                   Rollback
                 </button>
               </li>

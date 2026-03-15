@@ -51,14 +51,14 @@ function useSession() {
 function Protected({ children }: { children: React.ReactNode }) {
   const { session, loading } = useSession();
 
-  if (loading) return <div className="card">Loading…</div>;
+  if (loading) return <div className="card p-4">Loading…</div>;
   if (!session) return <Navigate to="/login" replace />;
   return <>{children}</>;
 }
 
 export function App() {
   return (
-    <div className="app-shell">
+    <div style={{ minHeight: "100vh", display: "flex", flexDirection: "column" }}>
       <Routes>
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
@@ -81,3 +81,4 @@ export function App() {
     </div>
   );
 }
+

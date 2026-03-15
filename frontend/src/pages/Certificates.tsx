@@ -21,12 +21,12 @@ export function Certificates() {
   if (loading) {
     return (
       <>
-        <header className="page-header">
-          <h1 className="page-title">Certificates</h1>
-          <p className="page-desc">TLS certificates managed by your proxy.</p>
+        <header className="mb-6">
+          <h1>Certificates</h1>
+          <p className="text-light">TLS certificates managed by your proxy.</p>
         </header>
-        <div className="card">
-          <p className="empty-state">Loading…</p>
+        <div className="card p-4">
+          <p className="text-light align-center p-4">Loading…</p>
         </div>
       </>
     );
@@ -34,32 +34,34 @@ export function Certificates() {
 
   return (
     <>
-      <header className="page-header">
-        <h1 className="page-title">Certificates</h1>
-        <p className="page-desc">TLS certificates (read-only). ACME certs are managed when you add sites with TLS.</p>
+      <header className="mb-6">
+        <h1>Certificates</h1>
+        <p className="text-light">TLS certificates (read-only). ACME certs are managed when you add sites with TLS.</p>
       </header>
       <article className="card">
         {certs.length === 0 ? (
-          <p className="empty-state">No certificate data. Enable TLS on a site to request ACME certs.</p>
+          <p className="text-light align-center p-4">No certificate data. Enable TLS on a site to request ACME certs.</p>
         ) : (
-          <table style={{ width: "100%", borderCollapse: "collapse" }}>
-            <thead>
-              <tr style={{ borderBottom: "1px solid var(--color-border)" }}>
-                <th style={{ textAlign: "left", padding: "var(--space-3)", fontSize: "var(--text-sm)", fontWeight: 600 }}>Domain</th>
-                <th style={{ textAlign: "left", padding: "var(--space-3)", fontSize: "var(--text-sm)", fontWeight: 600 }}>Issuer</th>
-                <th style={{ textAlign: "left", padding: "var(--space-3)", fontSize: "var(--text-sm)", fontWeight: 600 }}>Expiry</th>
-              </tr>
-            </thead>
-            <tbody>
-              {certs.map((c, i) => (
-                <tr key={i} style={{ borderBottom: "1px solid var(--color-border)" }}>
-                  <td style={{ padding: "var(--space-3)" }}>{c.domain}</td>
-                  <td style={{ padding: "var(--space-3)", color: "var(--color-text-muted)" }}>{c.issuer ?? "—"}</td>
-                  <td style={{ padding: "var(--space-3)", color: "var(--color-text-muted)" }}>{c.expiry ?? "—"}</td>
+          <div className="table">
+            <table>
+              <thead>
+                <tr>
+                  <th>Domain</th>
+                  <th>Issuer</th>
+                  <th>Expiry</th>
                 </tr>
-              ))}
-            </tbody>
-          </table>
+              </thead>
+              <tbody>
+                {certs.map((c, i) => (
+                  <tr key={i}>
+                    <td>{c.domain}</td>
+                    <td className="text-light">{c.issuer ?? "—"}</td>
+                    <td className="text-light">{c.expiry ?? "—"}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
         )}
       </article>
     </>

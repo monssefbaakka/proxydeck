@@ -15,12 +15,12 @@ export function Logs() {
   if (loading) {
     return (
       <>
-        <header className="page-header">
-          <h1 className="page-title">Logs</h1>
-          <p className="page-desc">Proxy log output.</p>
+        <header className="mb-6">
+          <h1>Logs</h1>
+          <p className="text-light">Proxy log output.</p>
         </header>
-        <div className="card">
-          <p className="empty-state">Loading…</p>
+        <div className="card p-4">
+          <p className="text-light align-center p-4">Loading…</p>
         </div>
       </>
     );
@@ -28,15 +28,15 @@ export function Logs() {
 
   return (
     <>
-      <header className="page-header">
-        <h1 className="page-title">Logs</h1>
-        <p className="page-desc">Proxy log output. Set PROXY_LOG_FILE in the environment to tail a log file.</p>
+      <header className="mb-6">
+        <h1>Logs</h1>
+        <p className="text-light">Proxy log output. Set PROXY_LOG_FILE in the environment to tail a log file.</p>
       </header>
       <article className="card">
         {lines.length === 0 ? (
-          <p className="empty-state">No log lines. Set PROXY_LOG_FILE to a log file path.</p>
+          <p className="text-light align-center p-4">No log lines. Set PROXY_LOG_FILE to a log file path.</p>
         ) : (
-          <pre className="pre-wrap" style={{ maxHeight: "60vh", overflow: "auto", margin: 0, padding: "var(--space-4)", background: "var(--color-bg)", borderRadius: "var(--radius)" }}>
+          <pre style={{ maxHeight: "60vh", overflow: "auto", margin: 0 }}>
             <code>{lines.join("\n")}</code>
           </pre>
         )}

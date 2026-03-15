@@ -28,44 +28,44 @@ export function Dashboard() {
 
   return (
     <>
-      <header className="page-header">
-        <h1 className="page-title">Dashboard</h1>
-        <p className="page-desc">Overview of your reverse proxy and quick actions.</p>
+      <header className="mb-6">
+        <h1>Dashboard</h1>
+        <p className="text-light">Overview of your reverse proxy and quick actions.</p>
       </header>
 
-      <section className="card" aria-labelledby="proxy-status-heading">
-        <h2 id="proxy-status-heading" className="section-title">Proxy status</h2>
-        <p className="row gap-2" style={{ alignItems: "center" }}>
-          <span className={hasProxy ? "status-ok" : "status-muted"}>
+      <section className="card mb-6" aria-labelledby="proxy-status-heading">
+        <h2 id="proxy-status-heading" className="mb-4" style={{ fontSize: "var(--text-4)" }}>Proxy status</h2>
+        <p className="hstack gap-2">
+          <span style={{ color: hasProxy ? "var(--success)" : "var(--muted-foreground)", fontWeight: 500 }}>
             {hasProxy ? "Connected" : "Not connected"}
           </span>
-          <span className="badge">{providerLabel}</span>
+          <span className="badge secondary">{providerLabel}</span>
         </p>
         {!hasProxy && (
-          <p className="status-muted" style={{ marginTop: "var(--space-2)", fontSize: "var(--text-sm)" }}>
+          <p className="text-light mt-2" style={{ fontSize: "var(--text-7)", marginBlockEnd: 0 }}>
             {status?.message ?? "Set CADDY_ADMIN or TRAEFIK_API_URL in your environment to manage a proxy."}
           </p>
         )}
       </section>
 
       <section aria-labelledby="quick-actions-heading">
-        <h2 id="quick-actions-heading" className="section-title">Quick actions</h2>
-        <div className="card-grid">
-          <Link to="/sites" className="quick-card">
-            <h3>Sites</h3>
-            <p>Add and edit hostnames, routes, and upstreams.</p>
+        <h2 id="quick-actions-heading" className="mb-4" style={{ fontSize: "var(--text-4)" }}>Quick actions</h2>
+        <div className="row" style={{ gap: "var(--space-4)", gridTemplateColumns: "repeat(auto-fill, minmax(14rem, 1fr))" }}>
+          <Link to="/sites" className="card p-4" style={{ display: "block", textDecoration: "none", color: "inherit" }}>
+            <h3 style={{ marginBlockEnd: "var(--space-2)" }}>Sites</h3>
+            <p className="text-light" style={{ marginBlockEnd: 0 }}>Add and edit hostnames, routes, and upstreams.</p>
           </Link>
-          <Link to="/config" className="quick-card">
-            <h3>Config</h3>
-            <p>Preview, validate, and apply proxy configuration.</p>
+          <Link to="/config" className="card p-4" style={{ display: "block", textDecoration: "none", color: "inherit" }}>
+            <h3 style={{ marginBlockEnd: "var(--space-2)" }}>Config</h3>
+            <p className="text-light" style={{ marginBlockEnd: 0 }}>Preview, validate, and apply proxy configuration.</p>
           </Link>
-          <Link to="/logs" className="quick-card">
-            <h3>Logs</h3>
-            <p>View proxy log output.</p>
+          <Link to="/logs" className="card p-4" style={{ display: "block", textDecoration: "none", color: "inherit" }}>
+            <h3 style={{ marginBlockEnd: "var(--space-2)" }}>Logs</h3>
+            <p className="text-light" style={{ marginBlockEnd: 0 }}>View proxy log output.</p>
           </Link>
-          <Link to="/certificates" className="quick-card">
-            <h3>Certificates</h3>
-            <p>Manage TLS certificates.</p>
+          <Link to="/certificates" className="card p-4" style={{ display: "block", textDecoration: "none", color: "inherit" }}>
+            <h3 style={{ marginBlockEnd: "var(--space-2)" }}>Certificates</h3>
+            <p className="text-light" style={{ marginBlockEnd: 0 }}>Manage TLS certificates.</p>
           </Link>
         </div>
       </section>

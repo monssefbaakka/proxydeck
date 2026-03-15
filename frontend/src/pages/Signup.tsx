@@ -84,49 +84,51 @@ export function Signup() {
 
   if (checkingSession || allowSignup === null) {
     return (
-      <div className="auth-page">
-        <div className="auth-box">
-          <article className="card">
-            <p>Loading…</p>
-          </article>
+      <div className="flex flex-col items-center justify-center" style={{ minHeight: "100vh", padding: "var(--space-6)" }}>
+        <div className="card p-4" style={{ maxWidth: "24rem", width: "100%" }}>
+          <p>Loading…</p>
         </div>
       </div>
     );
   }
 
   return (
-    <div className="auth-page">
-      <div className="auth-box">
-        <article className="card">
-          <header>
+    <div className="flex flex-col items-center justify-center" style={{ minHeight: "100vh", padding: "var(--space-6)" }}>
+      <div style={{ maxWidth: "24rem", width: "100%" }}>
+        <article className="card p-4">
+          <header className="mb-4">
             <h1>Create account</h1>
-            <p>One-time setup. Only one user is allowed.</p>
+            <p className="text-light">One-time setup. Only one user is allowed.</p>
           </header>
-          <form onSubmit={handleSubmit} className="stack">
-            <div className="field">
+          <form onSubmit={handleSubmit} className="vstack gap-4">
+            <div data-field>
               <label htmlFor="name">Name</label>
               <input id="name" name="name" type="text" required autoComplete="name" placeholder="Your name" />
             </div>
-            <div className="field">
+            <div data-field>
               <label htmlFor="email">Email</label>
               <input id="email" name="email" type="email" required autoComplete="email" placeholder="you@example.com" />
             </div>
-            <div className="field">
+            <div data-field>
               <label htmlFor="username">Username</label>
               <input id="username" name="username" type="text" required autoComplete="username" placeholder="Login username" />
             </div>
-            <div className="field">
+            <div data-field>
               <label htmlFor="password">Password</label>
               <input id="password" name="password" type="password" required autoComplete="new-password" placeholder="Choose a password" />
             </div>
-            {error && <div className="alert alert-error" role="alert">{error}</div>}
-            <button type="submit" className="btn btn-primary" disabled={loading}>
+            {error && (
+              <div role="alert" data-variant="danger">
+                {error}
+              </div>
+            )}
+            <button type="submit" disabled={loading}>
               {loading ? "Creating account…" : "Create account"}
             </button>
           </form>
-          <div className="auth-footer">
+          <p className="text-light mt-4 pt-4" style={{ borderTop: "1px solid var(--border)", marginBlockEnd: 0 }}>
             Already have an account? <a href="/login">Sign in</a>
-          </div>
+          </p>
         </article>
       </div>
     </div>

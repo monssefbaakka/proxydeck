@@ -69,12 +69,12 @@ export function Sites() {
   if (loading) {
     return (
       <>
-        <header className="page-header">
-          <h1 className="page-title">Sites</h1>
-          <p className="page-desc">Configure hostnames and reverse proxy routes.</p>
+        <header className="mb-6">
+          <h1>Sites</h1>
+          <p className="text-light">Configure hostnames and reverse proxy routes.</p>
         </header>
-        <div className="card">
-          <p className="empty-state">Loading…</p>
+        <div className="card p-4">
+          <p className="text-light align-center p-4">Loading…</p>
         </div>
       </>
     );
@@ -82,14 +82,14 @@ export function Sites() {
 
   return (
     <>
-      <header className="page-header">
-        <h1 className="page-title">Sites</h1>
-        <p className="page-desc">Configure hostnames and reverse proxy routes.</p>
-        <div className="row gap-2" style={{ marginTop: "var(--space-3)", alignItems: "center" }}>
-          <span className="section-title" style={{ marginBottom: 0, fontSize: "var(--text-sm)" }}>View:</span>
+      <header className="mb-6">
+        <h1>Sites</h1>
+        <p className="text-light">Configure hostnames and reverse proxy routes.</p>
+        <div className="hstack gap-2 mt-4">
+          <span style={{ fontSize: "var(--text-7)" }}>View:</span>
           <button
             type="button"
-            className={viewMode === "cards" ? "btn btn-primary btn-sm" : "btn btn-outline btn-sm"}
+            className={viewMode === "cards" ? "small" : "outline small"}
             onClick={() => setViewMode("cards")}
             title="Cards"
             aria-label="Cards view"
@@ -98,7 +98,7 @@ export function Sites() {
           </button>
           <button
             type="button"
-            className={viewMode === "table" ? "btn btn-primary btn-sm" : "btn btn-outline btn-sm"}
+            className={viewMode === "table" ? "small" : "outline small"}
             onClick={() => setViewMode("table")}
             title="Table"
             aria-label="Table view"
@@ -109,19 +109,19 @@ export function Sites() {
       </header>
       <article className="card">
         {validateResult && (
-          <div className={validateResult.valid ? "alert alert-success" : "alert alert-error"} role="status">
+          <div role="alert" data-variant={validateResult.valid ? "success" : "danger"} style={{ marginBlockEnd: "var(--space-4)" }}>
             {validateResult.valid ? "Config is valid." : validateResult.error}
           </div>
         )}
         {applyResult && (
-          <div className={applyResult.ok ? "alert alert-success" : "alert alert-error"} role="status">
+          <div role="alert" data-variant={applyResult.ok ? "success" : "danger"} style={{ marginBlockEnd: "var(--space-4)" }}>
             {applyResult.ok ? "Config applied successfully." : applyResult.error}
           </div>
         )}
         {config.sites.length === 0 ? (
-          <div className="empty-state">
-            <p>No sites yet. Add your first site to get started.</p>
-            <button type="button" className="btn btn-primary" style={{ marginTop: "var(--space-4)" }} onClick={addSite}>
+          <div className="align-center p-4">
+            <p className="text-light">No sites yet. Add your first site to get started.</p>
+            <button type="button" className="mt-4" onClick={addSite}>
               Add site
             </button>
           </div>
@@ -132,18 +132,18 @@ export function Sites() {
             onRemove={removeSite}
           />
         ) : (
-          <ul className="unstyled-list stack">
+          <ul className="unstyled vstack gap-4" style={{ padding: 0, margin: 0 }}>
             {config.sites.map((site, i) => (
-              <li key={i}>
+              <li key={i} style={{ listStyle: "none" }}>
                 <SiteEditor site={site} onChange={(s) => updateSite(i, s)} onRemove={() => removeSite(i)} />
               </li>
             ))}
           </ul>
         )}
-        <footer className="row gap-2" style={{ marginTop: "var(--space-6)" }}>
-          <button type="button" className="btn btn-outline" onClick={addSite}>Add site</button>
-          <button type="button" className="btn btn-outline" onClick={validate} disabled={!config.sites.length}>Validate</button>
-          <button type="button" className="btn btn-primary" onClick={apply} disabled={!config.sites.length}>Apply config</button>
+        <footer className="hstack gap-2 mt-6" style={{ paddingBlockStart: "var(--space-4)", borderTop: "1px solid var(--border)" }}>
+          <button type="button" className="outline" onClick={addSite}>Add site</button>
+          <button type="button" className="outline" onClick={validate} disabled={!config.sites.length}>Validate</button>
+          <button type="button" onClick={apply} disabled={!config.sites.length}>Apply config</button>
         </footer>
       </article>
     </>
@@ -160,34 +160,28 @@ function SitesTable({
   onRemove: (index: number) => void;
 }) {
   return (
-    <div style={{ overflowX: "auto" }}>
-      <table style={{ width: "100%", borderCollapse: "collapse" }}>
+    <div className="table" style={{ overflowX: "auto" }}>
+      <table>
         <thead>
-          <tr style={{ borderBottom: "1px solid var(--color-border)" }}>
-            <th style={{ textAlign: "left", padding: "var(--space-3)", fontSize: "var(--text-sm)", fontWeight: 600 }}>Hostnames</th>
-            <th style={{ textAlign: "left", padding: "var(--space-3)", fontSize: "var(--text-sm)", fontWeight: 600 }}>Routes</th>
-            <th style={{ textAlign: "left", padding: "var(--space-3)", fontSize: "var(--text-sm)", fontWeight: 600 }}>Upstreams</th>
-            <th style={{ textAlign: "right", padding: "var(--space-3)", fontSize: "var(--text-sm)", fontWeight: 600 }}>Actions</th>
+          <tr>
+            <th>Hostnames</th>
+            <th>Routes</th>
+            <th>Upstreams</th>
+            <th style={{ textAlign: "right" }}>Actions</th>
           </tr>
         </thead>
         <tbody>
           {sites.map((site, i) => (
-            <tr key={i} style={{ borderBottom: "1px solid var(--color-border)" }}>
-              <td style={{ padding: "var(--space-3)", fontSize: "var(--text-sm)", verticalAlign: "top" }}>
-                {site.hostnames.filter(Boolean).join(", ") || "—"}
-              </td>
-              <td style={{ padding: "var(--space-3)", fontSize: "var(--text-sm)", verticalAlign: "top" }}>
-                {site.routes.map((r) => r.match).filter(Boolean).join(", ") || "—"}
-              </td>
-              <td style={{ padding: "var(--space-3)", fontSize: "var(--text-sm)", verticalAlign: "top" }}>
-                {site.routes.map((r) => r.upstreams.map((u) => u.address).join(", ")).filter(Boolean).join(" | ") || "—"}
-              </td>
-              <td style={{ padding: "var(--space-3)", textAlign: "right", verticalAlign: "top" }}>
-                <span className="row gap-2" style={{ justifyContent: "flex-end" }}>
-                  <button type="button" className="btn btn-outline btn-sm" onClick={onSwitchToCards} title="Edit" aria-label="Edit site">
+            <tr key={i}>
+              <td>{site.hostnames.filter(Boolean).join(", ") || "—"}</td>
+              <td>{site.routes.map((r) => r.match).filter(Boolean).join(", ") || "—"}</td>
+              <td>{site.routes.map((r) => r.upstreams.map((u) => u.address).join(", ")).filter(Boolean).join(" | ") || "—"}</td>
+              <td style={{ textAlign: "right" }}>
+                <span className="hstack gap-2 justify-end">
+                  <button type="button" className="outline small" onClick={onSwitchToCards} title="Edit" aria-label="Edit site">
                     <PencilSimple size={18} weight="duotone" />
                   </button>
-                  <button type="button" className="btn btn-danger btn-sm" onClick={() => onRemove(i)} title="Remove" aria-label="Remove site">
+                  <button type="button" className="outline small" data-variant="danger" onClick={() => onRemove(i)} title="Remove" aria-label="Remove site">
                     <Trash size={18} weight="duotone" />
                   </button>
                 </span>
@@ -214,8 +208,8 @@ function SiteEditor({
 
   return (
     <article className="card">
-      <header className="row" style={{ justifyContent: "space-between", alignItems: "flex-start", flexWrap: "wrap", gap: "var(--space-4)" }}>
-        <div className="field" style={{ marginBottom: 0, flex: "1 1 12rem" }}>
+      <header className="hstack justify-between" style={{ flexWrap: "wrap", gap: "var(--space-4)" }}>
+        <div data-field style={{ flex: "1 1 12rem", marginBlockEnd: 0 }}>
           <label>Hostnames (comma-separated)</label>
           <input
             type="text"
@@ -227,15 +221,15 @@ function SiteEditor({
             }}
           />
         </div>
-        <button type="button" className="btn btn-danger btn-sm" onClick={onRemove} title="Remove site" aria-label="Remove site">
+        <button type="button" className="outline small" data-variant="danger" onClick={onRemove} title="Remove site" aria-label="Remove site">
           <Trash size={18} weight="duotone" />
         </button>
       </header>
-      <div className="stack" style={{ marginTop: "var(--space-4)" }}>
-        <h3 className="section-title">Routes</h3>
+      <div className="vstack gap-4 mt-4">
+        <h3 style={{ fontSize: "var(--text-4)", marginBlockEnd: 0 }}>Routes</h3>
         {site.routes.map((route, ri) => (
-          <div key={ri} className="stack" style={{ padding: "var(--space-4)", background: "var(--color-bg)", borderRadius: "var(--radius)" }}>
-            <div className="field">
+          <div key={ri} className="vstack gap-4 p-4" style={{ background: "var(--faint)", borderRadius: "var(--radius-medium)" }}>
+            <div data-field>
               <label>Match path</label>
               <input
                 type="text"
@@ -248,7 +242,7 @@ function SiteEditor({
                 }
               />
             </div>
-            <div className="field">
+            <div data-field>
               <label>Upstreams (one per line: host:port)</label>
               <textarea
                 value={route.upstreams.map((u) => u.address).join("\n")}

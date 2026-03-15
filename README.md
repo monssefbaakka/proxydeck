@@ -2,7 +2,7 @@
 
 ![Proxydeck](frontend/public/logo.svg)
 
-Web dashboard for Caddy and Traefik. Single app: Elysia (Bun) backend serves the React (Vite) UI from `frontend/dist`. One origin, one process in production and recommended dev workflow.
+Web dashboard for Caddy and Traefik. Single app: Elysia (Bun) backend serves the React (Vite) UI from `frontend/dist`. UI uses [Oat](https://oat.ink/) for base components and custom CSS for layout. One origin, one process in production and recommended dev workflow.
 
 ## Requirements
 

@@ -78,26 +78,24 @@ export function Login() {
 
   if (checkingSession) {
     return (
-      <div className="auth-page">
-        <div className="auth-box">
-          <article className="card">
-            <p>Loading…</p>
-          </article>
+      <div className="flex flex-col items-center justify-center" style={{ minHeight: "100vh", padding: "var(--space-6)" }}>
+        <div className="card p-4" style={{ maxWidth: "24rem", width: "100%" }}>
+          <p>Loading…</p>
         </div>
       </div>
     );
   }
 
   return (
-    <div className="auth-page">
-      <div className="auth-box">
-        <article className="card">
-          <header>
+    <div className="flex flex-col items-center justify-center" style={{ minHeight: "100vh", padding: "var(--space-6)" }}>
+      <div style={{ maxWidth: "24rem", width: "100%" }}>
+        <article className="card p-4">
+          <header className="mb-4">
             <h1>Sign in</h1>
-            <p>Enter your credentials to access Proxydeck.</p>
+            <p className="text-light">Enter your credentials to access Proxydeck.</p>
           </header>
-          <form onSubmit={handleSubmit} className="stack">
-            <div className="field">
+          <form onSubmit={handleSubmit} className="vstack gap-4">
+            <div data-field>
               <label htmlFor="username">Username</label>
               <input
                 id="username"
@@ -108,7 +106,7 @@ export function Login() {
                 placeholder="Your username"
               />
             </div>
-            <div className="field">
+            <div data-field>
               <label htmlFor="password">Password</label>
               <input
                 id="password"
@@ -119,15 +117,19 @@ export function Login() {
                 placeholder="Your password"
               />
             </div>
-            {error && <div className="alert alert-error" role="alert">{error}</div>}
-            <button type="submit" className="btn btn-primary" disabled={loading}>
+            {error && (
+              <div role="alert" data-variant="danger">
+                {error}
+              </div>
+            )}
+            <button type="submit" disabled={loading}>
               {loading ? "Signing in…" : "Sign in"}
             </button>
           </form>
           {allowSignup && (
-            <div className="auth-footer">
+            <p className="text-light mt-4 pt-4" style={{ borderTop: "1px solid var(--border)", marginBlockEnd: 0 }}>
               First time? <a href="/signup">Create an account</a>
-            </div>
+            </p>
           )}
         </article>
       </div>
