@@ -2,6 +2,7 @@ import { type ReactNode } from "react";
 import { Layout } from "../components/Layout";
 import { Dashboard } from "./Dashboard";
 import { Sites } from "./Sites";
+import { Certificates } from "./Certificates";
 
 interface AppProps {
   path?: string;
@@ -17,7 +18,7 @@ function Page({ path }: { path: string }) {
   if (path === "/") return <Dashboard />;
   if (path === "/sites") return <Sites />;
   if (path === "/config") return <h2>Config</h2>;
-  if (path === "/certificates") return <h2>Certificates</h2>;
+  if (path === "/certificates") return <Certificates />;
   if (path === "/logs") return <h2>Logs</h2>;
   return <h1>Proxydeck</h1>;
 }

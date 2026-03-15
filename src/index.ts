@@ -77,6 +77,7 @@ const app = new Elysia()
     if (!config?.sites) return { ok: false, error: "Invalid config: sites required" };
     return applyConfig(config);
   })
+  .get("/api/certificates", () => [])
   .get("/api/config/current", async () => {
     const config = await getLatest();
     return config ?? { sites: [] };
