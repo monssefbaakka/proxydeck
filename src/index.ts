@@ -16,7 +16,7 @@ import { getLogs } from "./api/logs";
 const PORT = process.env.PORT ?? "3000";
 const FRONTEND_DIR = join(process.cwd(), "frontend", "dist");
 
-const PUBLIC_API_PATHS = ["/api/auth", "/api/allow-signup"];
+const PUBLIC_API_PATHS = ["/api/auth", "/api/allow-signup", "/api/proxy/status"];
 
 async function apiAuthGuard({ request }: { request: Request }) {
   const pathname = new URL(request.url).pathname;
