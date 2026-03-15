@@ -40,6 +40,14 @@ const loginHtml = `
 </body></html>
 `;
 
+function dashboardPage(pathname: string) {
+  return () => {
+    const ssrContent = render(pathname);
+    const html = shell(ssrContent);
+    return new Response(html, { headers: { "Content-Type": "text/html" } });
+  };
+}
+
 const signupHtml = `
 <!DOCTYPE html>
 <html><head><meta charset="utf-8"><title>Sign up</title></head>
@@ -90,11 +98,11 @@ const app = new Elysia()
     const contentType = sub.endsWith(".js") ? "application/javascript" : sub.endsWith(".css") ? "text/css" : "application/octet-stream";
     return new Response(body, { headers: { "Content-Type": contentType } });
   })
-  .get("/", () => {
-    const ssrContent = render("/");
-    const html = shell(ssrContent);
-    return new Response(html, { headers: { "Content-Type": "text/html" } });
-  })
+  .get("/", dashboardPage("/"))
+  .get("/sites", dashboardPage("/sites"))
+  .get("/config", dashboardPage("/config"))
+  .get("/certificates", dashboardPage("/certificates"))
+  .get("/logs", dashboardPage("/logs"))
   .listen(PORT);
 
 console.log(`Server at http://localhost:${PORT}`);

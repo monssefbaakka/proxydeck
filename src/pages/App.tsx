@@ -1,14 +1,21 @@
 import { type ReactNode } from "react";
+import { Layout } from "../components/Layout";
 
 interface AppProps {
   path?: string;
   children?: ReactNode;
 }
 
-export function App({ path = "/", children }: AppProps) {
+function getPath(): string {
+  if (typeof window !== "undefined") return window.location.pathname;
+  return "/";
+}
+
+export function App({ path: pathProp, children }: AppProps) {
+  const path = pathProp ?? getPath();
   return (
-    <div>
+    <Layout>
       {children ?? <h1>Proxydeck</h1>}
-    </div>
+    </Layout>
   );
 }
