@@ -49,4 +49,4 @@ docker run -p 3000:3000 -e DATABASE_URL=... -e BETTER_AUTH_SECRET=... proxydeck
 | `bun run dev` | Dev server with hot reload |
 | `bun run build:client` | Build React bundle |
 | `bun run start` | Run server (run build:client first) |
-| `bun run db:migrate` | Apply schema |
+| `bun run db:migrate` | Apply schema (db/schema.sql) |
