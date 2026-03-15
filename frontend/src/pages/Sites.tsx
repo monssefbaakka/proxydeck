@@ -132,9 +132,9 @@ export function Sites() {
             onRemove={removeSite}
           />
         ) : (
-          <ul className="unstyled vstack gap-4" style={{ padding: 0, margin: 0 }}>
+          <ul className="unstyled vstack" style={{ padding: 0, margin: 0, gap: 0 }}>
             {config.sites.map((site, i) => (
-              <li key={i} style={{ listStyle: "none" }}>
+              <li key={i} style={{ listStyle: "none", borderBottom: "1px solid var(--border)", paddingBlockEnd: "var(--space-6)", marginBlockEnd: "var(--space-6)" }}>
                 <SiteEditor site={site} onChange={(s) => updateSite(i, s)} onRemove={() => removeSite(i)} />
               </li>
             ))}
@@ -207,7 +207,7 @@ function SiteEditor({
   const setRoutes = (routes: Route[]) => onChange({ ...site, routes });
 
   return (
-    <article className="card">
+    <section>
       <header className="hstack justify-between" style={{ flexWrap: "wrap", gap: "var(--space-4)" }}>
         <div data-field style={{ flex: "1 1 12rem", marginBlockEnd: 0 }}>
           <label>Hostnames (comma-separated)</label>
@@ -228,7 +228,7 @@ function SiteEditor({
       <div className="vstack gap-4 mt-4">
         <h3 style={{ fontSize: "var(--text-4)", marginBlockEnd: 0 }}>Routes</h3>
         {site.routes.map((route, ri) => (
-          <div key={ri} className="vstack gap-4 p-4" style={{ background: "var(--faint)", borderRadius: "var(--radius-medium)" }}>
+          <div key={ri} className="vstack gap-4" style={{ paddingBlockStart: "var(--space-4)", borderBlockStart: "1px solid var(--border)" }}>
             <div data-field>
               <label>Match path</label>
               <input
@@ -269,6 +269,6 @@ function SiteEditor({
           </div>
         ))}
       </div>
-    </article>
+    </section>
   );
 }
