@@ -1,8 +1,9 @@
-# Proxydeck
+<samp>
 
-![Proxydeck](frontend/public/logo.svg)
-
-Web dashboard for Caddy/Traefik. Bun + React, one origin. Needs: Bun, Node, PostgreSQL.
+<p align="center">
+  <img src="frontend/public/logo.svg" alt="Proxydeck" width="200" />
+  <p align="center">Web dashboard for Caddy/Traefik. Bun + React, one origin. Needs: Bun, Node, PostgreSQL.</p>
+</p>
 
 ```bash
 cp .env.sample .env   # BETTER_AUTH_SECRET, DATABASE_URL
@@ -10,7 +11,7 @@ bun install && cd frontend && npm install && cd ..
 bun run db:migrate && bun run build && bun run start
 ```
 
-`bun run dev` → http://localhost:3000
+`bun run dev` → <http://localhost:3000>
 
 **Production (Docker):**
 
@@ -35,3 +36,9 @@ Set `BETTER_AUTH_SECRET` in `.env`. Either set `DATABASE_URL` (your Postgres; no
 | `TRAEFIK_API_URL` | Traefik API URL (optional) |
 | `TRAEFIK_DYNAMIC_CONFIG` | Traefik dynamic config path (optional) |
 | `PROXY_LOG_FILE` | Proxy log file path (optional) |
+
+### License
+
+MIT
+
+</samp>
