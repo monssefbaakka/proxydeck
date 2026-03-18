@@ -2,10 +2,16 @@
 
 <p align="center">
   <img src="frontend/public/logo.svg" alt="Proxydeck" width="150" />
-  <p align="center">Web dashboard for Caddy/Traefik. Bun + React, one origin. Needs: Bun, Node, PostgreSQL.</p>
+  <p align="center">Web dashboard for Caddy/Traefik</p>
 </p>
 
 ---
+
+_**Tech Stack**_: Bun + React, one origin. Needs: Bun, Node, PostgreSQL.
+
+---
+
+
 
 ```bash
 cp .env.sample .env   # BETTER_AUTH_SECRET, DATABASE_URL
